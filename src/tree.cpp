@@ -31,3 +31,29 @@ std::unique_ptr<Node> loadConfig(const std::string& path) {
 
     return root;
 }
+
+ColorScheme loadColors(const std::string& path) {
+    ColorScheme cs;
+    auto cfg = toml::parse_file(path);
+    const auto* tbl = cfg["colors"].as_table();
+    if (!tbl) return cs;
+
+    auto get = [&](const char* key, std::string& field) {
+        if (auto v = (*tbl)[key].value<std::string>()) field = *v;
+    };
+
+    get("leaf_bg",          cs.leafBg);
+    get("leaf_border",      cs.leafBorder);
+    get("group_bg",         cs.groupBg);
+    get("group_border",     cs.groupBorder);
+    get("key_text",         cs.keyText);
+    get("label_text",       cs.labelText);
+    get("connector",        cs.connector);
+    get("center_dot",       cs.centerDot);
+    get("search_bg",        cs.searchBg);
+    get("search_border",    cs.searchBorder);
+    get("search_selection", cs.searchSelection);
+    get("search_text",      cs.searchText);
+
+    return cs;
+}

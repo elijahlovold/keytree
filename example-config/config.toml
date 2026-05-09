@@ -1,3 +1,22 @@
+[colors]
+# Executable nodes — rounded, bright blue border
+leaf_bg          = "#E0071520"
+leaf_border      = "#4499EE"
+# Group/subtree nodes — angular, amber border
+group_bg         = "#E01A0C06"
+group_border     = "#AA6622"
+# Text
+key_text         = "#88CCFF"
+label_text       = "#DDFFFFFF"
+# Radial connector lines (opacity is applied separately in the renderer)
+connector        = "#334466"
+center_dot       = "#5588CC"
+# Search panel
+search_bg        = "#E0071520"
+search_border    = "#4499EE"
+search_selection = "#774499EE"
+search_text      = "#AACCFF"
+
 [keys.g]
 label = "Games/"
 icon = "  "

@@ -14,8 +14,8 @@ Item {
         width:  Math.round(420 * fontScale)
         height: inputH + 1 + keyTree.searchResults.length * resultH + Math.round(24 * fontScale)
         radius: Math.round(12 * fontScale)
-        color: "#E01A1A2E"
-        border.color: "#4488DD"
+        color:        colorScheme.searchBg
+        border.color: colorScheme.searchBorder
         border.width: 1
 
         Column {
@@ -36,7 +36,7 @@ Item {
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "/"
-                    color: "#88CCFF"
+                    color: colorScheme.keyText
                     font.pixelSize: Math.round(20 * fontScale)
                     font.bold: true
                 }
@@ -58,7 +58,7 @@ Item {
                         width: Math.max(2, Math.round(2 * fontScale))
                         height: Math.round(17 * fontScale)
                         anchors.verticalCenter: parent.verticalCenter
-                        color: "#88CCFF"
+                        color: colorScheme.keyText
 
                         SequentialAnimation on opacity {
                             loops: Animation.Infinite
@@ -73,7 +73,7 @@ Item {
             Rectangle {
                 width: parent.width
                 height: 1
-                color: "#4488DD"
+                color:   colorScheme.searchBorder
                 opacity: 0.5
             }
 
@@ -88,14 +88,16 @@ Item {
                     width:  panel.width - Math.round(24 * fontScale)
                     height: resultH
                     radius: Math.round(5 * fontScale)
-                    color: index === keyTree.searchSelection ? "#774488DD" : "transparent"
+                    color: index === keyTree.searchSelection
+                        ? colorScheme.searchSelection
+                        : "transparent"
 
                     Text {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: Math.round(8 * fontScale)
                         text: modelData
-                        color: index === keyTree.searchSelection ? "white" : "#CCDDFF"
+                        color: index === keyTree.searchSelection ? "white" : colorScheme.searchText
                         font.pixelSize: Math.round(13 * fontScale)
                         font.family: "monospace"
                     }

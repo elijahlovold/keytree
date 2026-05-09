@@ -40,8 +40,10 @@ int main(int argc, char* argv[]) {
     // Parse config before Qt engine init to front-load the only real I/O
     std::string cfgPath = resolveConfigPath(argc, argv);
     std::unique_ptr<Node> root;
+    ColorScheme colors;
     try {
-        root = loadConfig(cfgPath);
+        root   = loadConfig(cfgPath);
+        colors = loadColors(cfgPath);
     } catch (const std::exception& e) {
         qCritical("keytree: failed to load config '%s': %s", cfgPath.c_str(), e.what());
         return 1;
@@ -54,6 +56,21 @@ int main(int argc, char* argv[]) {
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("keyTree"), &model);
+
+    QVariantMap colorMap;
+    colorMap[QStringLiteral("leafBg")]          = QString::fromStdString(colors.leafBg);
+    colorMap[QStringLiteral("leafBorder")]      = QString::fromStdString(colors.leafBorder);
+    colorMap[QStringLiteral("groupBg")]         = QString::fromStdString(colors.groupBg);
+    colorMap[QStringLiteral("groupBorder")]     = QString::fromStdString(colors.groupBorder);
+    colorMap[QStringLiteral("keyText")]         = QString::fromStdString(colors.keyText);
+    colorMap[QStringLiteral("labelText")]       = QString::fromStdString(colors.labelText);
+    colorMap[QStringLiteral("connector")]       = QString::fromStdString(colors.connector);
+    colorMap[QStringLiteral("centerDot")]       = QString::fromStdString(colors.centerDot);
+    colorMap[QStringLiteral("searchBg")]        = QString::fromStdString(colors.searchBg);
+    colorMap[QStringLiteral("searchBorder")]    = QString::fromStdString(colors.searchBorder);
+    colorMap[QStringLiteral("searchSelection")] = QString::fromStdString(colors.searchSelection);
+    colorMap[QStringLiteral("searchText")]      = QString::fromStdString(colors.searchText);
+    engine.rootContext()->setContextProperty(QStringLiteral("colorScheme"), colorMap);
 
     // Wayland: qt_add_qml_module embeds QML as resources; loading is identical
     // on X11 and Wayland — platform-specific divergence is in window flags only.

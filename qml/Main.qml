@@ -69,26 +69,16 @@ Window {
 
         RadialView {
             anchors.fill: parent
-            items: keyTree.children
-            fontScale: root.fontScale
+            items:       keyTree.children
+            fontScale:   root.fontScale
+            centerLabel: keyTree.currentLabel
+            atRoot:      keyTree.atRoot
             visible: !keyTree.searchMode
         }
 
         SearchView {
             fontScale: root.fontScale
             visible: keyTree.searchMode
-        }
-
-        Text {
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin: Math.round(12 * root.fontScale)
-            visible: !keyTree.searchMode && !keyTree.atRoot
-            text: keyTree.currentLabel
-            color: "#DDFFFFFF"
-            font.pixelSize: Math.round(13 * root.fontScale)
-            style: Text.Outline
-            styleColor: "#80000000"
         }
     }
 
