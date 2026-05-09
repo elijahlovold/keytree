@@ -32,5 +32,12 @@ struct Node {
     bool isLeaf() const { return !cmd.empty(); }
 };
 
+struct KeyBindings {
+    std::string back   = "Escape";
+    std::string quit   = "q";
+    std::string search = "/";
+};
+
 std::unique_ptr<Node> loadConfig(const std::string& path);
 ColorScheme           loadColors(const std::string& path);
+KeyBindings           loadKeyBindings(const std::string& path);

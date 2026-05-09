@@ -32,6 +32,23 @@ std::unique_ptr<Node> loadConfig(const std::string& path) {
     return root;
 }
 
+KeyBindings loadKeyBindings(const std::string& path) {
+    KeyBindings kb;
+    auto cfg = toml::parse_file(path);
+    const auto* tbl = cfg["commands"].as_table();
+    if (!tbl) return kb;
+
+    auto get = [&](const char* key, std::string& field) {
+        if (auto v = (*tbl)[key].value<std::string>()) field = *v;
+    };
+
+    get("back",   kb.back);
+    get("quit",   kb.quit);
+    get("search", kb.search);
+
+    return kb;
+}
+
 ColorScheme loadColors(const std::string& path) {
     ColorScheme cs;
     auto cfg = toml::parse_file(path);

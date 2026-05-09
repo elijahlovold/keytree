@@ -28,35 +28,56 @@ Window {
         anchors.fill: parent
         focus: true
 
+        // Maps a config binding string to a key event match.
+        // Named keys: "Escape"/"Esc", "Return"/"Enter", "Backspace", "Tab".
+        // Everything else is matched as a single character against event.text.
+        function keyMatches(event, binding) {
+            switch (binding) {
+            case "Escape": case "Esc":
+                return event.key === Qt.Key_Escape
+            case "Return": case "Enter":
+                return event.key === Qt.Key_Return || event.key === Qt.Key_Enter
+            case "Backspace":
+                return event.key === Qt.Key_Backspace
+            case "Tab":
+                return event.key === Qt.Key_Tab
+            default:
+                return binding.length === 1 && event.text === binding
+            }
+        }
+
         Keys.onPressed: (event) => {
             if (keyTree.searchMode) {
-                switch (event.key) {
-                case Qt.Key_Escape:
-                    keyTree.exitSearch(); break
-                case Qt.Key_Return:
-                case Qt.Key_Enter:
-                    keyTree.confirmSearch(); break
-                case Qt.Key_Backspace:
-                    keyTree.backspaceSearch(); break
-                case Qt.Key_Up:
-                    keyTree.navigateSearch(-1); break
-                case Qt.Key_Down:
-                    keyTree.navigateSearch(1); break
-                default:
-                    if (event.text.length > 0)
-                        keyTree.appendSearch(event.text)
+                // back exits search; quit is intentionally inactive while typing
+                if (keyMatches(event, keyBindings.back)) {
+                    keyTree.exitSearch()
+                } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                    keyTree.confirmSearch()
+                } else if (event.key === Qt.Key_Backspace) {
+                    keyTree.backspaceSearch()
+                } else if (event.key === Qt.Key_Up) {
+                    keyTree.navigateSearch(-1)
+                } else if (event.key === Qt.Key_Down) {
+                    keyTree.navigateSearch(1)
+                } else if (event.text.length > 0) {
+                    keyTree.appendSearch(event.text)
                 }
                 event.accepted = true
                 return
             }
 
             // Normal tree mode
-            if (event.key === Qt.Key_Escape) {
+            if (keyMatches(event, keyBindings.quit)) {
+                Qt.quit()
+                event.accepted = true
+                return
+            }
+            if (keyMatches(event, keyBindings.back)) {
                 keyTree.back()
                 event.accepted = true
                 return
             }
-            if (event.text === "/") {
+            if (keyMatches(event, keyBindings.search)) {
                 keyTree.enterSearch()
                 event.accepted = true
                 return

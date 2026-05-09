@@ -41,9 +41,11 @@ int main(int argc, char* argv[]) {
     std::string cfgPath = resolveConfigPath(argc, argv);
     std::unique_ptr<Node> root;
     ColorScheme colors;
+    KeyBindings kb;
     try {
         root   = loadConfig(cfgPath);
         colors = loadColors(cfgPath);
+        kb     = loadKeyBindings(cfgPath);
     } catch (const std::exception& e) {
         qCritical("keytree: failed to load config '%s': %s", cfgPath.c_str(), e.what());
         return 1;
@@ -71,6 +73,12 @@ int main(int argc, char* argv[]) {
     colorMap[QStringLiteral("searchSelection")] = QString::fromStdString(colors.searchSelection);
     colorMap[QStringLiteral("searchText")]      = QString::fromStdString(colors.searchText);
     engine.rootContext()->setContextProperty(QStringLiteral("colorScheme"), colorMap);
+
+    QVariantMap bindMap;
+    bindMap[QStringLiteral("back")]   = QString::fromStdString(kb.back);
+    bindMap[QStringLiteral("quit")]   = QString::fromStdString(kb.quit);
+    bindMap[QStringLiteral("search")] = QString::fromStdString(kb.search);
+    engine.rootContext()->setContextProperty(QStringLiteral("keyBindings"), bindMap);
 
     // Wayland: qt_add_qml_module embeds QML as resources; loading is identical
     // on X11 and Wayland — platform-specific divergence is in window flags only.
