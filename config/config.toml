@@ -1,0 +1,18 @@
+[keys.g]
+label = "Games"
+
+[keys.g.s]
+label = "Steam"
+cmd = "steam"
+
+[keys.g.e]
+label = "Emulators"
+cmd = "retroarch"
+
+[keys.f.f]
+label = "Firefox"
+cmd = "/usr/bin/firefox"
+
+[keys.t]
+label = "Terminal"
+cmd = "alacritty"

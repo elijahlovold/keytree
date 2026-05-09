@@ -1,0 +1,49 @@
+cmake_minimum_required(VERSION 3.24)
+project(keytree VERSION 0.1.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Quick)
+find_package(X11 REQUIRED)  # linked for future X11-specific code (window type atoms, etc.)
+
+include(FetchContent)
+FetchContent_Declare(
+    tomlplusplus
+    GIT_REPOSITORY https://github.com/marzer/tomlplusplus.git
+    GIT_TAG        v3.4.0
+    GIT_SHALLOW    TRUE
+)
+FetchContent_MakeAvailable(tomlplusplus)
+
+qt_standard_project_setup()
+
+qt_add_executable(keytree
+    src/main.cpp
+    src/tree.cpp
+    src/executor.cpp
+    src/model.cpp
+)
+
+qt_add_qml_module(keytree
+    URI KeyTree
+    VERSION 1.0
+    QML_FILES
+        qml/Main.qml
+        qml/RadialView.qml
+)
+
+target_link_libraries(keytree PRIVATE
+    Qt6::Core
+    Qt6::Quick
+    tomlplusplus::tomlplusplus
+    ${X11_LIBRARIES}
+)
+
+target_include_directories(keytree PRIVATE
+    src
+    ${X11_INCLUDE_DIR}
+)
+
+install(TARGETS keytree RUNTIME DESTINATION bin)
