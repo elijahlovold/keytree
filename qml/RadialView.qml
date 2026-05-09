@@ -3,16 +3,22 @@ import QtQuick
 Item {
     id: root
 
-    property var items: []
+    property var  items: []
+    property real fontScale: 1.0
 
-    readonly property real cx: width  / 2
-    readonly property real cy: height / 2
-    readonly property real r:  Math.min(width, height) * 0.38
+    readonly property real cx:    width  / 2
+    readonly property real cy:    height / 2
+    readonly property real r:     Math.min(width, height) * 0.38
+    readonly property real nodeW: Math.round(88 * fontScale)
+    readonly property real nodeH: Math.round(64 * fontScale)
 
     // Center dot — indicates active subtree depth
     Rectangle {
-        x: root.cx - 5; y: root.cy - 5
-        width: 10; height: 10; radius: 5
+        x: root.cx - Math.round(5 * fontScale)
+        y: root.cy - Math.round(5 * fontScale)
+        width:  Math.round(10 * fontScale)
+        height: Math.round(10 * fontScale)
+        radius: Math.round(5  * fontScale)
         color: "#5588CC"
         opacity: 0.85
     }
@@ -23,10 +29,9 @@ Item {
         delegate: Item {
             id: node
 
-            required property var    modelData
-            required property int    index
+            required property var modelData
+            required property int index
 
-            // Distribute children evenly around the circle, top-anchored
             readonly property real angle: root.items.length === 1
                 ? -Math.PI / 2
                 : -Math.PI / 2 + (index / root.items.length) * 2 * Math.PI
@@ -34,12 +39,14 @@ Item {
             readonly property real px: root.cx + root.r * Math.cos(angle)
             readonly property real py: root.cy + root.r * Math.sin(angle)
 
-            x: px - 44; y: py - 32
-            width: 88; height: 64
+            x: px - root.nodeW / 2
+            y: py - root.nodeH / 2
+            width:  root.nodeW
+            height: root.nodeH
 
             Rectangle {
                 anchors.fill: parent
-                radius: 10
+                radius: Math.round(10 * fontScale)
                 color: modelData.isLeaf ? "#E00D1B2E" : "#E01A1A2E"
                 border.color: modelData.isLeaf ? "#4488DD" : "#335577"
                 border.width: 1
@@ -47,13 +54,13 @@ Item {
 
             Column {
                 anchors.centerIn: parent
-                spacing: 3
+                spacing: Math.round(3 * fontScale)
 
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: modelData.key
                     color: "#88CCFF"
-                    font.pixelSize: 22
+                    font.pixelSize: Math.round(22 * fontScale)
                     font.bold: true
                 }
 
@@ -61,8 +68,8 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: modelData.label
                     color: "#DDFFFFFF"
-                    font.pixelSize: 11
-                    width: 82
+                    font.pixelSize: Math.round(11 * fontScale)
+                    width: Math.round(82 * fontScale)
                     horizontalAlignment: Text.AlignHCenter
                     elide: Text.ElideRight
                 }

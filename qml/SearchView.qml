@@ -3,13 +3,17 @@ import QtQuick
 Item {
     anchors.fill: parent
 
+    property real fontScale: 1.0
+
+    readonly property real inputH:  Math.round(40 * fontScale)
+    readonly property real resultH: Math.round(34 * fontScale)
+
     Rectangle {
         id: panel
         anchors.centerIn: parent
-        width: 420
-        // input row + separator + results rows + vertical padding
-        height: 40 + 1 + keyTree.searchResults.length * 34 + 24
-        radius: 12
+        width:  Math.round(420 * fontScale)
+        height: inputH + 1 + keyTree.searchResults.length * resultH + Math.round(24 * fontScale)
+        radius: Math.round(12 * fontScale)
         color: "#E01A1A2E"
         border.color: "#4488DD"
         border.width: 1
@@ -19,21 +23,21 @@ Item {
                 top: parent.top
                 left: parent.left
                 right: parent.right
-                margins: 12
+                margins: Math.round(12 * fontScale)
             }
             spacing: 0
 
             // Input row
             Row {
                 width: parent.width
-                height: 40
-                spacing: 8
+                height: inputH
+                spacing: Math.round(8 * fontScale)
 
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "/"
                     color: "#88CCFF"
-                    font.pixelSize: 20
+                    font.pixelSize: Math.round(20 * fontScale)
                     font.bold: true
                 }
 
@@ -41,18 +45,18 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 2
                     clip: true
-                    width: parent.width - 32
+                    width: parent.width - Math.round(32 * fontScale)
 
                     Text {
                         text: keyTree.searchText
                         color: "white"
-                        font.pixelSize: 15
+                        font.pixelSize: Math.round(15 * fontScale)
                         font.family: "monospace"
                     }
 
                     Rectangle {
-                        width: 2
-                        height: 17
+                        width: Math.max(2, Math.round(2 * fontScale))
+                        height: Math.round(17 * fontScale)
                         anchors.verticalCenter: parent.verticalCenter
                         color: "#88CCFF"
 
@@ -81,18 +85,18 @@ Item {
                     required property string modelData
                     required property int    index
 
-                    width: panel.width - 24
-                    height: 34
-                    radius: 5
+                    width:  panel.width - Math.round(24 * fontScale)
+                    height: resultH
+                    radius: Math.round(5 * fontScale)
                     color: index === keyTree.searchSelection ? "#774488DD" : "transparent"
 
                     Text {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
-                        anchors.leftMargin: 8
+                        anchors.leftMargin: Math.round(8 * fontScale)
                         text: modelData
                         color: index === keyTree.searchSelection ? "white" : "#CCDDFF"
-                        font.pixelSize: 13
+                        font.pixelSize: Math.round(13 * fontScale)
                         font.family: "monospace"
                     }
                 }

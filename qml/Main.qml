@@ -3,8 +3,21 @@ import QtQuick.Window
 
 Window {
     id: root
-    width: 520
-    height: 520
+
+    // Physical DPI: pixelDensity is logical px/mm; multiply by devicePixelRatio to
+    // get physical px/mm, then by 25.4 to get physical DPI. Works on both X11
+    // (unscaled 4K: devicePixelRatio=1, high pixelDensity) and Wayland
+    // (compositor-scaled: devicePixelRatio>1, lower reported pixelDensity).
+    readonly property real physicalDpi: Screen.pixelDensity * Screen.devicePixelRatio * 25.4
+    readonly property real dpiScale:    Math.max(1.0, physicalDpi / 96.0)
+
+    // Window pre-sized by DPI so it occupies a consistent physical footprint.
+    // fontScale is derived from actual window size rather than DPI alone so that
+    // any manual window resize or WM override also flows through to fonts.
+    width:  Math.round(520 * dpiScale)
+    height: Math.round(520 * dpiScale)
+    readonly property real fontScale: Math.min(width, height) / 520.0
+
     x: Screen.width  / 2 - width  / 2
     y: Screen.height / 2 - height / 2
     // Wayland: layer-shell protocol would replace WindowStaysOnTopHint here
@@ -57,21 +70,23 @@ Window {
         RadialView {
             anchors.fill: parent
             items: keyTree.children
+            fontScale: root.fontScale
             visible: !keyTree.searchMode
         }
 
         SearchView {
+            fontScale: root.fontScale
             visible: keyTree.searchMode
         }
 
         Text {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin: 12
+            anchors.bottomMargin: Math.round(12 * root.fontScale)
             visible: !keyTree.searchMode && !keyTree.atRoot
             text: keyTree.currentLabel
             color: "#DDFFFFFF"
-            font.pixelSize: 13
+            font.pixelSize: Math.round(13 * root.fontScale)
             style: Text.Outline
             styleColor: "#80000000"
         }
