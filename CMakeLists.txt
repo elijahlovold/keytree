@@ -4,6 +4,7 @@ project(keytree VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Quick)
 find_package(X11 REQUIRED)  # linked for future X11-specific code (window type atoms, etc.)
@@ -32,6 +33,7 @@ qt_add_qml_module(keytree
     QML_FILES
         qml/Main.qml
         qml/RadialView.qml
+        qml/SearchView.qml
 )
 
 target_link_libraries(keytree PRIVATE

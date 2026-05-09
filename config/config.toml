@@ -16,3 +16,7 @@ cmd = "/usr/bin/firefox"
 [keys.t]
 label = "Terminal"
 cmd = "alacritty"
+
+[keys.s]
+label = "Spotify"
+cmd = "spotify"

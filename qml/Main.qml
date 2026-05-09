@@ -16,8 +16,35 @@ Window {
         focus: true
 
         Keys.onPressed: (event) => {
+            if (keyTree.searchMode) {
+                switch (event.key) {
+                case Qt.Key_Escape:
+                    keyTree.exitSearch(); break
+                case Qt.Key_Return:
+                case Qt.Key_Enter:
+                    keyTree.confirmSearch(); break
+                case Qt.Key_Backspace:
+                    keyTree.backspaceSearch(); break
+                case Qt.Key_Up:
+                    keyTree.navigateSearch(-1); break
+                case Qt.Key_Down:
+                    keyTree.navigateSearch(1); break
+                default:
+                    if (event.text.length > 0)
+                        keyTree.appendSearch(event.text)
+                }
+                event.accepted = true
+                return
+            }
+
+            // Normal tree mode
             if (event.key === Qt.Key_Escape) {
                 keyTree.back()
+                event.accepted = true
+                return
+            }
+            if (event.text === "/") {
+                keyTree.enterSearch()
                 event.accepted = true
                 return
             }
@@ -30,13 +57,19 @@ Window {
         RadialView {
             anchors.fill: parent
             items: keyTree.children
+            visible: !keyTree.searchMode
+        }
+
+        SearchView {
+            visible: keyTree.searchMode
         }
 
         Text {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: 12
-            text: keyTree.atRoot ? "" : keyTree.currentLabel
+            visible: !keyTree.searchMode && !keyTree.atRoot
+            text: keyTree.currentLabel
             color: "#DDFFFFFF"
             font.pixelSize: 13
             style: Text.Outline
