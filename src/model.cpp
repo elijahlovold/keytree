@@ -23,6 +23,9 @@ QVariantList KeyTreeModel::children() const {
         item[QStringLiteral("key")]    = QString(QChar(node->key));
         item[QStringLiteral("label")]  = QString::fromStdString(node->label);
         item[QStringLiteral("isLeaf")] = node->isLeaf();
+        // left(5) counts QChars — surrogate pairs for emoji count as 2, but that
+        // still enforces a reasonable visual limit without cutting mid-codepoint.
+        item[QStringLiteral("icon")]   = QString::fromStdString(node->icon).left(5);
         list.append(item);
     }
     return list;

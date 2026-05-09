@@ -56,12 +56,26 @@ Item {
                 anchors.centerIn: parent
                 spacing: Math.round(3 * fontScale)
 
-                Text {
+                Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: modelData.key
-                    color: "#88CCFF"
-                    font.pixelSize: Math.round(22 * fontScale)
-                    font.bold: true
+                    spacing: Math.round(3 * fontScale)
+
+                    Text {
+                        visible: modelData.icon.length > 0
+                        text: modelData.icon
+                        color: "#88CCFF"
+                        font.pixelSize: Math.round(18 * fontScale)
+                        font.bold: true
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Text {
+                        text: modelData.key
+                        color: "#88CCFF"
+                        font.pixelSize: Math.round(22 * fontScale)
+                        font.bold: true
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
 
                 Text {

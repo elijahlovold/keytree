@@ -1,22 +1,37 @@
 [keys.g]
 label = "Games"
+icon = "  "
+
+[keys.g.f]
+label = "Factorio"
+cmd = "~/.steam/steam/steamapps/common/Factorio/bin/x64/factorio"
+icon = "  "
 
 [keys.g.s]
 label = "Steam"
 cmd = "steam"
+icon = "  "
 
 [keys.g.e]
 label = "Emulators"
 cmd = "retroarch"
+icon = "󰣇  "
+
+[keys.f]
+label = "Browsers"
+icon = "  "
 
 [keys.f.f]
 label = "Firefox"
-cmd = "/usr/bin/firefox"
+cmd = "firefox"
+icon = "  "
 
 [keys.t]
 label = "Terminal"
 cmd = "alacritty"
+icon = "  "
 
 [keys.s]
 label = "Spotify"
 cmd = "spotify"
+icon = "  "

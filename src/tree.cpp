@@ -13,6 +13,8 @@ static void buildSubtree(Node* parent, const toml::table& tbl) {
             child->label = *label;
         if (auto cmd = child_tbl["cmd"].value<std::string>())
             child->cmd = *cmd;
+        if (auto icon = child_tbl["icon"].value<std::string>())
+            child->icon = *icon;
 
         buildSubtree(child.get(), child_tbl);
         parent->children[child->key] = std::move(child);
