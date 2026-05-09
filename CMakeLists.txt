@@ -19,6 +19,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(tomlplusplus)
 
 qt_standard_project_setup()
+qt_policy(SET QTP0001 NEW)
+qt_policy(SET QTP0004 NEW)
 
 qt_add_executable(keytree
     src/main.cpp
@@ -49,3 +51,27 @@ target_include_directories(keytree PRIVATE
 )
 
 install(TARGETS keytree RUNTIME DESTINATION bin)
+
+# ── Tests ─────────────────────────────────────────────────────────────────────
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(CUNIT REQUIRED cunit)
+
+add_executable(keytree_tests
+    tests/tests.cpp
+    src/tree.cpp
+    src/model.cpp
+    src/executor.cpp
+)
+target_link_libraries(keytree_tests PRIVATE
+    Qt6::Core
+    tomlplusplus::tomlplusplus
+    ${CUNIT_LIBRARIES}
+)
+target_include_directories(keytree_tests PRIVATE
+    src
+    ${CUNIT_INCLUDE_DIRS}
+)
+target_compile_options(keytree_tests PRIVATE ${CUNIT_CFLAGS_OTHER})
+
+enable_testing()
+add_test(NAME unit COMMAND keytree_tests)
