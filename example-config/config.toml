@@ -1,5 +1,5 @@
 [keys.g]
-label = "Games"
+label = "Games/"
 icon = "  "
 
 [keys.g.f]
@@ -18,7 +18,7 @@ cmd = "retroarch"
 icon = "󰣇  "
 
 [keys.f]
-label = "Browsers"
+label = "Browsers/"
 icon = "  "
 
 [keys.f.f]
@@ -26,12 +26,31 @@ label = "Firefox"
 cmd = "firefox"
 icon = "  "
 
+[keys.f.g]
+label = "Google"
+cmd = "google-chrome"
+icon = "  "
+
 [keys.t]
 label = "Terminal"
 cmd = "alacritty"
 icon = "  "
 
-[keys.s]
-label = "Spotify"
+[keys.m]
+label = "Music"
 cmd = "spotify"
 icon = "  "
+
+[keys.s]
+label = "Social/"
+icon = "  "
+
+[keys.s.d]
+label = "Discord"
+cmd = "discord"
+icon = "  "
+
+[keys.s.s]
+label = "Slack"
+cmd = "slack"
+icon = "  "
