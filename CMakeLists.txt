@@ -52,6 +52,15 @@ target_include_directories(keytree PRIVATE
 
 install(TARGETS keytree RUNTIME DESTINATION bin)
 
+# Bake CMAKE_SOURCE_DIR into the install script at configure time (@ONLY so
+# install-time variables like ${_home} are left untouched for runtime eval).
+configure_file(
+    cmake/install_config.cmake.in
+    ${CMAKE_BINARY_DIR}/install_config.cmake
+    @ONLY
+)
+install(SCRIPT ${CMAKE_BINARY_DIR}/install_config.cmake)
+
 # ── Tests ─────────────────────────────────────────────────────────────────────
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(CUNIT REQUIRED cunit)

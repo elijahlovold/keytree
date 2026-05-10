@@ -22,43 +22,15 @@ search_border    = "#4499EE"
 search_selection = "#774499EE"
 search_text      = "#AACCFF"
 
-[keys.g]
-label = "Games/"
-icon = "  "
-
-[keys.g.f]
-label = "Factorio"
-cmd = "~/.steam/steam/steamapps/common/Factorio/bin/x64/factorio"
-icon = "  "
-
-[keys.g.s]
-label = "Steam"
-cmd = "steam"
-icon = "  "
-
-[keys.g.e]
-label = "Emulators"
-cmd = "retroarch"
-icon = "󰣇  "
-
-[keys.f]
-label = "Browsers/"
-icon = "  "
-
-[keys.f.f]
-label = "Firefox"
-cmd = "firefox"
-icon = "  "
-
-[keys.f.g]
-label = "Google"
-cmd = "google-chrome"
-icon = "  "
-
 [keys.t]
 label = "Terminal"
 cmd = "alacritty"
 icon = "  "
+
+[keys.p]
+label = "Python"
+cmd = "alacritty -e python3.14"
+icon = "  "
 
 [keys.m]
 label = "Music"
@@ -78,3 +50,35 @@ icon = "  "
 label = "Slack"
 cmd = "slack"
 icon = "  "
+
+[keys.f]
+label = "Browsers/"
+icon = "  "
+
+[keys.f.f]
+label = "Firefox"
+cmd = "firefox"
+icon = "  "
+
+[keys.f.g]
+label = "Google"
+cmd = "google-chrome"
+icon = "  "
+[keys.g]
+label = "Games/"
+icon = "  "
+
+[keys.g.f]
+label = "Factorio"
+cmd = "steam -applaunch 427520"
+icon = "  "
+
+[keys.g.s]
+label = "Steam"
+cmd = "steam"
+icon = "  "
+
+[keys.g.e]
+label = "Emulators"
+cmd = "retroarch"
+icon = "󰣇  "
