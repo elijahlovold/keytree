@@ -4,6 +4,12 @@ Fast, deterministic, hierarchical application launcher. Single key presses navig
 
 ![screenshot](images/screenshot1.png)
 
+---
+
+[![Demo Video](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://youtu.be/KwGKJvCWXJo?si=Nxtg_CmJiayVdIwr)
+
+---
+
 ## Dependencies
 
 ### Runtime
