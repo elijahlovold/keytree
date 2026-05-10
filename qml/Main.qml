@@ -18,8 +18,8 @@ Window {
     height: Math.round(520 * dpiScale)
     readonly property real fontScale: Math.min(width, height) / 520.0
 
-    x: Screen.width  / 2 - width  / 2
-    y: Screen.height / 2 - height / 2
+    x: Screen.virtualX + Screen.width  / 2 - width  / 2
+    y: Screen.virtualY + Screen.height / 2 - height / 2
     // Wayland: layer-shell protocol would replace WindowStaysOnTopHint here
     flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     color: "transparent"
