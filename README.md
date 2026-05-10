@@ -2,7 +2,7 @@
 
 Fast, deterministic, hierarchical application launcher. Single key presses navigate a tree of apps; designed to be launched directly by your window manager.
 
-![[images/screenshot1.png]]
+![screenshot](images/screenshot1.png)
 
 ## Dependencies
 
