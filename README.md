@@ -2,6 +2,8 @@
 
 Fast, deterministic, hierarchical application launcher. Single key presses navigate a tree of apps; designed to be launched directly by your window manager.
 
+![[images/screenshot1.png]]
+
 ## Dependencies
 
 ### Runtime
@@ -67,25 +69,6 @@ See `example-config/config.toml` for a full annotated example.
 ### Format
 
 ```toml
-[commands]
-back   = "Escape"   # move up a group (or quit at root)
-quit   = "q"        # quit immediately
-search = "/"        # enter PATH search mode
-
-[colors]
-leaf_bg          = "#E0071520"
-leaf_border      = "#4499EE"
-group_bg         = "#E01A0C06"
-group_border     = "#AA6622"
-key_text         = "#88CCFF"
-label_text       = "#DDFFFFFF"
-connector        = "#334466"
-center_dot       = "#5588CC"
-search_bg        = "#E0071520"
-search_border    = "#4499EE"
-search_selection = "#774499EE"
-search_text      = "#AACCFF"
-
 [keys.t]
 label = "Terminal"
 cmd   = "alacritty"
