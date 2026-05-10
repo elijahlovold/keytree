@@ -37,6 +37,20 @@ label = "Music"
 cmd = "spotify"
 icon = "  "
 
+[keys.b]
+label = "Websites"
+icon = "󰖟  "
+
+[keys.b.g]
+label = "Github"
+cmd = "firefox https://github.com/elijahlovold/keytree"
+icon = "  "
+
+[keys.b.y]
+label = "Youtube"
+cmd = "firefox https://youtube.com/"
+icon = "  "
+
 [keys.s]
 label = "Social/"
 icon = "  "
@@ -51,6 +65,7 @@ label = "Slack"
 cmd = "slack"
 icon = "  "
 
+
 [keys.f]
 label = "Browsers/"
 icon = "  "
@@ -64,19 +79,21 @@ icon = "  "
 label = "Google"
 cmd = "google-chrome"
 icon = "  "
+
+
 [keys.g]
 label = "Games/"
 icon = "  "
-
-[keys.g.f]
-label = "Factorio"
-cmd = "steam -applaunch 427520"
-icon = "  "
 
 [keys.g.s]
 label = "Steam"
 cmd = "steam"
 icon = "  "
+
+[keys.g.f]
+label = "Factorio"
+cmd = "steam -applaunch 427520"
+icon = "  "
 
 [keys.g.e]
 label = "Emulators"
